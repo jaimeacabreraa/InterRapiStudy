@@ -1,0 +1,6 @@
+@InterRapiStudy_HostAddress = http://localhost:5287
+
+GET {{InterRapiStudy_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
