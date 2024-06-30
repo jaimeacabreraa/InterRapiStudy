@@ -1,4 +1,5 @@
 using InterRapiStudy.Dtos;
+using InterRapiStudy.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,7 +7,7 @@ namespace InterRapiStudy.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RegisterSubjectController : ControllerBase
+    public class RegisterSubjectController(IRegisterSubjectService registerSubjectService) : ControllerBase
     {
         // GET: api/<RegisterController>
         [HttpGet]
@@ -24,8 +25,9 @@ namespace InterRapiStudy.Controllers
 
         // POST api/<RegisterController>
         [HttpPost]
-        public void Post([FromBody] CreateRegisterDto createRegisterDto)
+        public async Task Post([FromBody] CreateRegisterDto createRegisterDto)
         {
+            await registerSubjectService.Create(createRegisterDto);
         }
 
         // PUT api/<RegisterController>/5

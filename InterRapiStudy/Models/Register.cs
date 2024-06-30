@@ -13,9 +13,9 @@ public partial class Register
 
     public DateTime? UpdatedAt { get; set; }
 
-    public int SudentId { get; set; }
+    public int StudentId { get; set; }
 
     public virtual ICollection<RegisterDetail> RegisterDetails { get; set; } = new List<RegisterDetail>();
 
-    public virtual Student Sudent { get; set; } = null!;
+    public virtual Student Student { get; set; } = null!;
 }

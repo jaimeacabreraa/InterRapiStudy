@@ -21,8 +21,25 @@ public class ProgramSubjectService(InterRapiStudyDbContext context):IProgramSubj
         return programs.Select(p => _mapper.Map<FindProgramSubjectDto>(p));
     }
 
-    public Task Assign(CreateProgramSubjectDto createProgramSubject)
+    public async Task Assign(CreateProgramSubjectDto createProgramSubject)
     {
-        throw new NotImplementedException();
+        var cps = createProgramSubject;
+    
+        // Iniciar las tareas por separado sin esperarlas inmediatamente
+        var program =await context.ProgramStudies.SingleAsync(p => p.Name == cps.ProgramStudy);
+        var teacher =await context.Teachers.SingleAsync(t => t.Email == cps.TeacherEmail);
+        var subject =await context.Subjects.SingleAsync(s => s.Name == cps.Subject);
+
+
+        var programSubject = new ProgramSubject
+        {
+            ProgramId = program.ProgramId,
+            TeacherId = teacher.TeacherId,
+            SubjectId = subject.SubjectId,
+        };
+
+        context.ProgramSubjects.Add(programSubject);
+
+        await context.SaveChangesAsync();
     }
 }

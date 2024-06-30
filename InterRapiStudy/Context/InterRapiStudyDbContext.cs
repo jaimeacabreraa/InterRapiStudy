@@ -107,13 +107,13 @@ public partial class InterRapiStudyDbContext : DbContext
 
             entity.ToTable("register");
 
-            entity.HasIndex(e => e.SudentId, "fk_regiter_sudent1_idx");
+            entity.HasIndex(e => e.StudentId, "fk_regiter_Student1_idx");
 
             entity.Property(e => e.RegId).HasColumnName("reg_id");
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("timestamp")
                 .HasColumnName("created_at");
-            entity.Property(e => e.SudentId).HasColumnName("sudent_id");
+            entity.Property(e => e.StudentId).HasColumnName("Student_id");
             entity.Property(e => e.Uid)
                 .HasMaxLength(100)
                 .HasColumnName("uid");
@@ -121,7 +121,7 @@ public partial class InterRapiStudyDbContext : DbContext
                 .HasColumnType("timestamp")
                 .HasColumnName("updated_at");
 
-            entity.HasOne(d => d.Sudent).WithMany(p => p.Registers).HasForeignKey(d => d.SudentId);
+            entity.HasOne(d => d.Student).WithMany(p => p.Registers).HasForeignKey(d => d.StudentId);
         });
 
         modelBuilder.Entity<RegisterDetail>(entity =>

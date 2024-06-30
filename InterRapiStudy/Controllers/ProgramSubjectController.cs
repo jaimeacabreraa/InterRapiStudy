@@ -26,13 +26,14 @@ namespace InterRapiStudy.Controllers
 
         // POST api/<ProgramSubjectController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task Post([FromBody] CreateProgramSubjectDto createProgramSubjectDto)
         {
+            await _programSubjectService.Assign(createProgramSubjectDto);   
         }
 
         // PUT api/<ProgramSubjectController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task Put(int id, [FromBody] CreateProgramSubjectDto createProgramSubjectDto)
         {
         }
 

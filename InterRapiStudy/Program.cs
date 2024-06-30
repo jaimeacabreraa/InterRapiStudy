@@ -20,6 +20,7 @@ builder.Services.AddTransient<ISubjectService, SubjectService>();
 builder.Services.AddTransient<ITeacherService, TeacherService>();
 builder.Services.AddTransient<IProgramService, ProgramService>();
 builder.Services.AddTransient<IProgramSubjectService, ProgramSubjectService>();
+builder.Services.AddTransient<IRegisterSubjectService, RegisterSubjectService>();
 
 var app = builder.Build();
 
