@@ -24,29 +24,10 @@ public class StudentController : ControllerBase
         return await _studentService.GetStudents();
     }
 
-    // GET api/<StudentController>/5
-    [HttpGet("{id}")]
-    public string Get(int id)
-    {
-        return "value";
-    }
-
     // POST api/<StudentController>
     [HttpPost]
     public async Task Post([FromBody] StudentDto studentDto)
     {
         await _studentService.CreateStudent(studentDto);
-    }
-
-    // PUT api/<StudentController>/5
-    [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
-    {
-    }
-
-    // DELETE api/<StudentController>/5
-    [HttpDelete("{id}")]
-    public void Delete(int id)
-    {
     }
 }

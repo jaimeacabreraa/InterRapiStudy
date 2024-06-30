@@ -37,6 +37,7 @@ public static class AutoMapperConfig
                     dest => dest.TeacherEmail,
                     opt => opt.MapFrom(src => src.Teacher.Email)
                 );
+            cfg.CreateMap<FindRegisterDto, Register>();
         });
 
         return config.CreateMapper();

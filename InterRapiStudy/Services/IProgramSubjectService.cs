@@ -7,4 +7,5 @@ public interface IProgramSubjectService
     public Task<IEnumerable<FindProgramSubjectDto>> FindAll();
 
     public Task Assign(CreateProgramSubjectDto createProgramSubject);
+    public Task<IEnumerable<FindProgramSubjectDto>> FindByProgram(string program);
 }

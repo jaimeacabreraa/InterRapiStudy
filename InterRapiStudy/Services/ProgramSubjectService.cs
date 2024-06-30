@@ -70,4 +70,14 @@ public class ProgramSubjectService(InterRapiStudyDbContext context) : IProgramSu
 
         await context.SaveChangesAsync();
     }
+
+    public async Task<IEnumerable<FindProgramSubjectDto>> FindByProgram(string program)
+    {
+        return await context.ProgramSubjects.Where(ps => ps.Program.Name == program).Select(ps=>new FindProgramSubjectDto
+        {
+            Subject = ps.Subject.Name,
+            TeacherEmail = ps.Teacher.Email,
+            ProgramStudy = ps.Program.Name
+        }).ToListAsync();
+    }
 }

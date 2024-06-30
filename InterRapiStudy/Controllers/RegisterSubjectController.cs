@@ -10,16 +10,9 @@ public class RegisterSubjectController(IRegisterSubjectService registerSubjectSe
 {
     // GET: api/<RegisterController>
     [HttpGet]
-    public IEnumerable<string> Get()
+    public async Task<IEnumerable<FindRegisterDto?>> Get()
     {
-        return new[] { "value1", "value2" };
-    }
-
-    // GET api/<RegisterController>/5
-    [HttpGet("{id}")]
-    public string Get(int id)
-    {
-        return "value";
+        return await registerSubjectService.FindAll();
     }
 
     // POST api/<RegisterController>
@@ -28,16 +21,11 @@ public class RegisterSubjectController(IRegisterSubjectService registerSubjectSe
     {
         await registerSubjectService.Create(createRegisterDto);
     }
-
-    // PUT api/<RegisterController>/5
-    [HttpPut("{id}")]
-    public void Put(int id, [FromBody] string value)
+    
+    // GET: api/<RegisterController>
+    [HttpGet("student/{student}")]
+    public async Task<IEnumerable<FindStudentSubjectDto?>> Get(string student)
     {
-    }
-
-    // DELETE api/<RegisterController>/5
-    [HttpDelete("{id}")]
-    public void Delete(int id)
-    {
+        return await registerSubjectService.FindStudentSubject(student);
     }
 }
