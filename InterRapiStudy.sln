@@ -5,6 +5,8 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterRapiStudy", "InterRapiStudy\InterRapiStudy.csproj", "{F87A7F8F-45DB-4490-A6F6-8A48BBE95637}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterRapiStudy.Tests", "InterRapiStudy.Tests\InterRapiStudy.Tests.csproj", "{CC12B70B-318B-41F0-AF9D-25CE5B1B2BB9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{F87A7F8F-45DB-4490-A6F6-8A48BBE95637}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F87A7F8F-45DB-4490-A6F6-8A48BBE95637}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F87A7F8F-45DB-4490-A6F6-8A48BBE95637}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC12B70B-318B-41F0-AF9D-25CE5B1B2BB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC12B70B-318B-41F0-AF9D-25CE5B1B2BB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC12B70B-318B-41F0-AF9D-25CE5B1B2BB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC12B70B-318B-41F0-AF9D-25CE5B1B2BB9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

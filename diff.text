@@ -1,0 +1,391 @@
+diff --git a/InterRapiStudy.sln b/InterRapiStudy.sln
+index a6c77f4..f16e9b7 100644
+--- a/InterRapiStudy.sln
++++ b/InterRapiStudy.sln
+@@ -5,6 +5,8 @@ VisualStudioVersion = 17.10.35013.160
+ MinimumVisualStudioVersion = 10.0.40219.1
+ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterRapiStudy", "InterRapiStudy\InterRapiStudy.csproj", "{F87A7F8F-45DB-4490-A6F6-8A48BBE95637}"
+ EndProject
++Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InterRapiStudy.Tests", "InterRapiStudy.Tests\InterRapiStudy.Tests.csproj", "{CC12B70B-318B-41F0-AF9D-25CE5B1B2BB9}"
++EndProject
+ Global
+ 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+ 		Debug|Any CPU = Debug|Any CPU
+@@ -15,6 +17,10 @@ Global
+ 		{F87A7F8F-45DB-4490-A6F6-8A48BBE95637}.Debug|Any CPU.Build.0 = Debug|Any CPU
+ 		{F87A7F8F-45DB-4490-A6F6-8A48BBE95637}.Release|Any CPU.ActiveCfg = Release|Any CPU
+ 		{F87A7F8F-45DB-4490-A6F6-8A48BBE95637}.Release|Any CPU.Build.0 = Release|Any CPU
++		{CC12B70B-318B-41F0-AF9D-25CE5B1B2BB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
++		{CC12B70B-318B-41F0-AF9D-25CE5B1B2BB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
++		{CC12B70B-318B-41F0-AF9D-25CE5B1B2BB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
++		{CC12B70B-318B-41F0-AF9D-25CE5B1B2BB9}.Release|Any CPU.Build.0 = Release|Any CPU
+ 	EndGlobalSection
+ 	GlobalSection(SolutionProperties) = preSolution
+ 		HideSolutionNode = FALSE
+diff --git a/InterRapiStudy/Controllers/StudentController.cs b/InterRapiStudy/Controllers/StudentController.cs
+index 861c510..cc48ae1 100644
+--- a/InterRapiStudy/Controllers/StudentController.cs
++++ b/InterRapiStudy/Controllers/StudentController.cs
+@@ -1,5 +1,6 @@
+ ﻿using InterRapiStudy.Dtos;
+ using InterRapiStudy.Services;
++using Microsoft.AspNetCore.Authorization;
+ using Microsoft.AspNetCore.Mvc;
+ 
+ // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+@@ -19,6 +20,7 @@ public class StudentController : ControllerBase
+ 
+     // GET: api/<StudentController>
+     [HttpGet]
++    [Authorize]
+     public async Task<IEnumerable<StudentDto>> Get()
+     {
+         return await _studentService.GetStudents();
+diff --git a/InterRapiStudy/Dtos/CreateProgramStudyDto.cs b/InterRapiStudy/Dtos/CreateProgramStudyDto.cs
+index 48c3ce5..b61c9b5 100644
+--- a/InterRapiStudy/Dtos/CreateProgramStudyDto.cs
++++ b/InterRapiStudy/Dtos/CreateProgramStudyDto.cs
+@@ -2,5 +2,5 @@
+ 
+ public class CreateProgramStudyDto
+ {
+-    public string Name { get; set; }
++    public string? Name { get; set; }
+ }
+\ No newline at end of file
+diff --git a/InterRapiStudy/Dtos/CreateProgramSubjectDto.cs b/InterRapiStudy/Dtos/CreateProgramSubjectDto.cs
+index 32b63f4..587e0bc 100644
+--- a/InterRapiStudy/Dtos/CreateProgramSubjectDto.cs
++++ b/InterRapiStudy/Dtos/CreateProgramSubjectDto.cs
+@@ -2,7 +2,7 @@
+ 
+ public class CreateProgramSubjectDto
+ {
+-    public string Subject { get; set; }
+-    public string TeacherEmail { get; set; }
+-    public string ProgramStudy { get; set; }
++    public string? Subject { get; set; }
++    public string? TeacherEmail { get; set; }
++    public string? ProgramStudy { get; set; }
+ }
+\ No newline at end of file
+diff --git a/InterRapiStudy/Dtos/CreateRegisterDetailDto.cs b/InterRapiStudy/Dtos/CreateRegisterDetailDto.cs
+index 9998b14..312d1f0 100644
+--- a/InterRapiStudy/Dtos/CreateRegisterDetailDto.cs
++++ b/InterRapiStudy/Dtos/CreateRegisterDetailDto.cs
+@@ -2,9 +2,9 @@
+ 
+ public class CreateRegisterDetailDto
+ {
+-    public string Subject { get; set; }
++    public string? Subject { get; set; }
+ 
+-    public string TeacherEmail { get; set; }
++    public string? TeacherEmail { get; set; }
+ 
+-    public string ProgramStudy { get; set; }
++    public string? ProgramStudy { get; set; }
+ }
+\ No newline at end of file
+diff --git a/InterRapiStudy/Dtos/CreateRegisterDto.cs b/InterRapiStudy/Dtos/CreateRegisterDto.cs
+index 6873e6d..f0ef964 100644
+--- a/InterRapiStudy/Dtos/CreateRegisterDto.cs
++++ b/InterRapiStudy/Dtos/CreateRegisterDto.cs
+@@ -2,7 +2,7 @@
+ 
+ public class CreateRegisterDto
+ {
+-    public string StudentEmail { get; set; }
++    public string? StudentEmail { get; set; }
+ 
+-    public List<CreateRegisterDetailDto> RegisterDetail { get; set; }
++    public List<CreateRegisterDetailDto>? RegisterDetail { get; set; }
+ }
+\ No newline at end of file
+diff --git a/InterRapiStudy/Dtos/FindProgramStudyDto.cs b/InterRapiStudy/Dtos/FindProgramStudyDto.cs
+index 0059230..24ac22f 100644
+--- a/InterRapiStudy/Dtos/FindProgramStudyDto.cs
++++ b/InterRapiStudy/Dtos/FindProgramStudyDto.cs
+@@ -2,5 +2,5 @@
+ 
+ public class FindProgramStudyDto
+ {
+-    public string Name { get; set; }
++    public string? Name { get; set; }
+ }
+\ No newline at end of file
+diff --git a/InterRapiStudy/Dtos/FindRegisterDetailDto.cs b/InterRapiStudy/Dtos/FindRegisterDetailDto.cs
+index 18912e9..c107ebc 100644
+--- a/InterRapiStudy/Dtos/FindRegisterDetailDto.cs
++++ b/InterRapiStudy/Dtos/FindRegisterDetailDto.cs
+@@ -2,9 +2,9 @@
+ 
+ public class FindRegisterDetailDto
+ {
+-    public string Subject { get; set; }
++    public string? Subject { get; set; }
+ 
+-    public string TeacherEmail { get; set; }
++    public string? TeacherEmail { get; set; }
+ 
+-    public string ProgramStudy { get; set; }
++    public string? ProgramStudy { get; set; }
+ }
+\ No newline at end of file
+diff --git a/InterRapiStudy/Dtos/FindRegisterDto.cs b/InterRapiStudy/Dtos/FindRegisterDto.cs
+index 4aedf0e..a9eba81 100644
+--- a/InterRapiStudy/Dtos/FindRegisterDto.cs
++++ b/InterRapiStudy/Dtos/FindRegisterDto.cs
+@@ -2,8 +2,8 @@
+ 
+ public class FindRegisterDto
+ {
+-    public string Uid { get; set; }
+-    public string StudentEmail { get; set; }
++    public string? Uid { get; set; }
++    public string? StudentEmail { get; set; }
+ 
+-    public IEnumerable<FindRegisterDetailDto> RegisterDetail { get; set; }
++    public IEnumerable<FindRegisterDetailDto>? RegisterDetail { get; set; }
+ }
+\ No newline at end of file
+diff --git a/InterRapiStudy/Dtos/FindStudentSubjectDto.cs b/InterRapiStudy/Dtos/FindStudentSubjectDto.cs
+index 9745de4..619e8e4 100644
+--- a/InterRapiStudy/Dtos/FindStudentSubjectDto.cs
++++ b/InterRapiStudy/Dtos/FindStudentSubjectDto.cs
+@@ -2,7 +2,7 @@ namespace InterRapiStudy.Dtos;
+ 
+ public class FindStudentSubjectDto
+ {
+-    public string Subject { get; set; }
++    public string? Subject { get; set; }
+ 
+-    public List<string> StudentsNames { get; set; }
++    public List<string>? StudentsNames { get; set; }
+ }
+\ No newline at end of file
+diff --git a/InterRapiStudy/InterRapiStudy.csproj b/InterRapiStudy/InterRapiStudy.csproj
+index a1ee72e..018c8c4 100644
+--- a/InterRapiStudy/InterRapiStudy.csproj
++++ b/InterRapiStudy/InterRapiStudy.csproj
+@@ -10,6 +10,7 @@
+ 
+     <ItemGroup>
+         <PackageReference Include="AutoMapper" Version="13.0.1"/>
++        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.6" />
+         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6"/>
+         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.6">
+             <PrivateAssets>all</PrivateAssets>
+diff --git a/InterRapiStudy/Program.cs b/InterRapiStudy/Program.cs
+index 1426e95..3fcec7c 100644
+--- a/InterRapiStudy/Program.cs
++++ b/InterRapiStudy/Program.cs
+@@ -1,7 +1,11 @@
++using System.Text;
+ using InterRapiStudy.Context;
++using InterRapiStudy.Custom;
+ using InterRapiStudy.Exceptions;
+ using InterRapiStudy.Services;
++using Microsoft.AspNetCore.Authentication.JwtBearer;
+ using Microsoft.EntityFrameworkCore;
++using Microsoft.IdentityModel.Tokens;
+ 
+ var builder = WebApplication.CreateBuilder(args);
+ 
+@@ -20,6 +24,30 @@ builder.Services.AddTransient<ITeacherService, TeacherService>();
+ builder.Services.AddTransient<IProgramService, ProgramService>();
+ builder.Services.AddTransient<IProgramSubjectService, ProgramSubjectService>();
+ builder.Services.AddTransient<IRegisterSubjectService, RegisterSubjectService>();
++builder.Services.AddTransient<IAuthenticateService, AuthenticateService>();
++builder.Services.AddSingleton<Utilidades>();
++
++builder.Services.AddAuthentication(config =>
++{
++    config.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
++    config.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
++}).AddJwtBearer(config =>
++{
++    config.RequireHttpsMetadata = false;
++    config.SaveToken = true;
++    config.TokenValidationParameters = new TokenValidationParameters
++    {
++        //ValidIssuer = builder.Configuration["Jwt:Issuer"],
++        //ValidAudience = builder.Configuration["Jwt:Audience"],
++        //ValidateIssuerSigningKey = true,
++        ValidateAudience = false,
++        ValidateIssuer = false,
++        ValidateLifetime = true,
++        ClockSkew = TimeSpan.Zero,
++        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:key"]!)),
++    };
++});
++
+ 
+ var app = builder.Build();
+ 
+@@ -34,11 +62,11 @@ app.UseMiddleware<CustomExceptionHandlerMiddleware>();
+ 
+ app.UseHttpsRedirection();
+ 
++app.UseAuthentication();
+ app.UseAuthorization();
+ 
+ app.MapControllers();
+ 
+-// Configurar CORS para aceptar     cualquier origen, método y encabezado.
+ app.UseCors(b => b
+     .AllowAnyOrigin()
+     .AllowAnyMethod()
+diff --git a/InterRapiStudy/Services/RegisterSubjectService.cs b/InterRapiStudy/Services/RegisterSubjectService.cs
+index aecef93..7bc8e3a 100644
+--- a/InterRapiStudy/Services/RegisterSubjectService.cs
++++ b/InterRapiStudy/Services/RegisterSubjectService.cs
+@@ -9,72 +9,82 @@ public class RegisterSubjectService(InterRapiStudyDbContext context) : IRegister
+ {
+     public async Task Create(CreateRegisterDto createRegisterDto)
+     {
+-        if (createRegisterDto.RegisterDetail.Count > 3)
++        if (createRegisterDto.RegisterDetail is { Count: > 3 })
+         {
+             throw new InvalidOperationException("Solo se puede registrar 3 materias");
+         }
+ 
+-        var subjects = createRegisterDto.RegisterDetail.Select(rd => rd.Subject).ToList();
+-
+-        if (subjects.Distinct().Count() != subjects.Count)
++        if (createRegisterDto.RegisterDetail != null)
+         {
+-            throw new InvalidOperationException(
+-                "No puedes registrar  2 materias iguales.");
++            var subjects = createRegisterDto.RegisterDetail.Select(rd => rd.Subject).ToList();
++
++            if (subjects.Distinct().Count() != subjects.Count)
++            {
++                throw new InvalidOperationException(
++                    "No puedes registrar  2 materias iguales.");
++            }
+         }
+ 
+ 
+         // Verificar que no haya materias con el mismo profesor
+-        var teachers = createRegisterDto.RegisterDetail.Select(rd => rd.TeacherEmail).ToList();
+-        if (teachers.Distinct().Count() != teachers.Count)
++        if (createRegisterDto.RegisterDetail != null)
+         {
+-            throw new InvalidOperationException(
+-                "No se pueden registrar materias con el mismo profesor en un mismo registro.");
++            var teachers = createRegisterDto.RegisterDetail.Select(rd => rd.TeacherEmail).ToList();
++            if (teachers.Distinct().Count() != teachers.Count)
++            {
++                throw new InvalidOperationException(
++                    "No se pueden registrar materias con el mismo profesor en un mismo registro.");
++            }
+         }
+ 
+ 
+-        createRegisterDto.RegisterDetail.ForEach(rd => { });
++        createRegisterDto.RegisterDetail?.ForEach(rd => { });
+ 
+         var student = await context.Students
+             .AsNoTracking()
+             .SingleAsync(st => st.Email == createRegisterDto.StudentEmail);
+ 
+-        var subjectNames = createRegisterDto.RegisterDetail.Select(rd => rd.Subject).ToList();
+-        var teacherEmails = createRegisterDto.RegisterDetail.Select(rd => rd.TeacherEmail).ToList();
+-
+-        var programSubjects = await context.ProgramSubjects
+-            .Include(ps => ps.Subject)
+-            .Include(ps => ps.Teacher)
+-            .Where(ps => ps.ProgramId == student.ProgramId &&
+-                         subjectNames.Contains(ps.Subject.Name) &&
+-                         teacherEmails.Contains(ps.Teacher.Email))
+-            .ToListAsync();
+-
+-        var registerSubjects = new Register
++        if (createRegisterDto.RegisterDetail != null)
+         {
+-            StudentId = student.StudentId,
+-            RegisterDetails = new List<RegisterDetail>()
+-        };
+-
+-        foreach (var rd in createRegisterDto.RegisterDetail)
+-        {
+-            var programSubject = programSubjects
+-                .FirstOrDefault(ps => ps.Subject.Name == rd.Subject && ps.Teacher.Email == rd.TeacherEmail);
++            var subjectNames = createRegisterDto.RegisterDetail.Select(rd => rd.Subject).ToList();
++            var teacherEmails = createRegisterDto.RegisterDetail.Select(rd => rd.TeacherEmail).ToList();
++
++            var programSubjects = await context.ProgramSubjects
++                .Include(ps => ps.Subject)
++                .Include(ps => ps.Teacher)
++                .Where(ps => ps.ProgramId == student.ProgramId &&
++                             subjectNames.Contains(ps.Subject.Name) &&
++                             teacherEmails.Contains(ps.Teacher.Email))
++                .ToListAsync();
++
++            var registerSubjects = new Register
++            {
++                StudentId = student.StudentId,
++                RegisterDetails = new List<RegisterDetail>()
++            };
+ 
+-            if (programSubject != null)
++            foreach (var rd in createRegisterDto.RegisterDetail)
+             {
+-                var registerDetail = new RegisterDetail
+-                {
+-                    ProgSubj = programSubject
+-                    // Add other properties initialization if needed
+-                };
++                var programSubject = programSubjects
++                    .FirstOrDefault(ps => ps.Subject.Name == rd.Subject && ps.Teacher.Email == rd.TeacherEmail);
+ 
+-                registerSubjects.RegisterDetails.Add(registerDetail);
++                if (programSubject != null)
++                {
++                    var registerDetail = new RegisterDetail
++                    {
++                        ProgSubj = programSubject
++                        // Add other properties initialization if needed
++                    };
++
++                    registerSubjects.RegisterDetails.Add(registerDetail);
++                }
+             }
+-        }
+ 
+-        registerSubjects.Uid = Guid.NewGuid().ToString();
++            registerSubjects.Uid = Guid.NewGuid().ToString();
++
++            context.Registers.Add(registerSubjects);
++        }
+ 
+-        context.Registers.Add(registerSubjects);
+         await context.SaveChangesAsync();
+     }
+ 
+@@ -125,7 +135,6 @@ public class RegisterSubjectService(InterRapiStudyDbContext context) : IRegister
+             
+             studentsSubjects.Add(studentSubject);
+         }
+-            
+ 
+         return studentsSubjects;
+     }
+diff --git a/InterRapiStudy/appsettings.json b/InterRapiStudy/appsettings.json
+index 9cc5021..4797b96 100644
+--- a/InterRapiStudy/appsettings.json
++++ b/InterRapiStudy/appsettings.json
+@@ -8,5 +8,11 @@
+   "ConnectionStrings": {
+     "Default": "server=localhost;database=inter_rapi_study_db;user=root;password=root"
+   },
+-  "AllowedHosts": "*"
++  "AllowedHosts": "*",
++  "Jwt": {
++    "Key": "N8Ea7ZNPa2x78dN6sE7UG4M2l9qDy1R4GG1EaWJwJDk=",
++    "Issuer": "your_issuer",
++    "Audience": "your_audience",
++    "ExpirationDays": 30
++  }
+ }

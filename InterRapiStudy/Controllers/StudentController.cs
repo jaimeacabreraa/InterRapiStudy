@@ -1,5 +1,6 @@
 ﻿using InterRapiStudy.Dtos;
 using InterRapiStudy.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -19,6 +20,7 @@ public class StudentController : ControllerBase
 
     // GET: api/<StudentController>
     [HttpGet]
+    [Authorize]
     public async Task<IEnumerable<StudentDto>> Get()
     {
         return await _studentService.GetStudents();
