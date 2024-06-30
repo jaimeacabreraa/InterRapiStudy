@@ -11,13 +11,11 @@ namespace InterRapiStudy.Controllers
     [ApiController]
     public class TeacherController(ITeacherService teacherService) : ControllerBase
     {
-        private readonly ITeacherService _teacherService = teacherService;
-        
         // GET: api/<TeacherController>
         [HttpGet]
         public async Task<IEnumerable<FindTeacherDto>> Get()
         {
-            return await _teacherService.GetTeachers();
+            return await teacherService.GetTeachers();
         }
 
         // GET api/<TeacherController>/5
@@ -31,7 +29,7 @@ namespace InterRapiStudy.Controllers
         [HttpPost]
         public async Task Post([FromBody] CreateTeacherDto createTeacherDto)
         {
-            await _teacherService.CreateTeacher(createTeacherDto);
+            await teacherService.CreateTeacher(createTeacherDto);
         }
 
         // PUT api/<TeacherController>/5

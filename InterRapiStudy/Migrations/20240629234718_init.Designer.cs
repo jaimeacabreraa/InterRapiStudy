@@ -127,9 +127,9 @@ namespace InterRapiStudy.Migrations
                         .HasColumnType("timestamp")
                         .HasColumnName("created_at");
 
-                    b.Property<int>("ProgSubjlId")
+                    b.Property<int>("ProgSubjId")
                         .HasColumnType("int")
-                        .HasColumnName("prog_subjl_id");
+                        .HasColumnName("prog_subj_id");
 
                     b.Property<int>("RegiterId")
                         .HasColumnType("int")
@@ -142,7 +142,7 @@ namespace InterRapiStudy.Migrations
                     b.HasKey("RegDetId")
                         .HasName("PRIMARY");
 
-                    b.HasIndex(new[] { "ProgSubjlId" }, "fk_register_detail_program_detail1_idx");
+                    b.HasIndex(new[] { "ProgSubjId" }, "fk_register_detail_program_detail1_idx");
 
                     b.HasIndex(new[] { "RegiterId" }, "fk_register_detail_regiter1_idx");
 
@@ -298,9 +298,9 @@ namespace InterRapiStudy.Migrations
 
             modelBuilder.Entity("InterRapiStudy.Models.RegisterDetail", b =>
                 {
-                    b.HasOne("InterRapiStudy.Models.ProgramSubject", "ProgSubjl")
+                    b.HasOne("InterRapiStudy.Models.ProgramSubject", "ProgSubj")
                         .WithMany("RegisterDetails")
-                        .HasForeignKey("ProgSubjlId")
+                        .HasForeignKey("ProgSubjId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -310,7 +310,7 @@ namespace InterRapiStudy.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_register_detail_regiter1");
 
-                    b.Navigation("ProgSubjl");
+                    b.Navigation("ProgSubj");
 
                     b.Navigation("Regiter");
                 });

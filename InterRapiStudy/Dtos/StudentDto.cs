@@ -2,7 +2,6 @@ namespace InterRapiStudy.Dtos;
 
 public class StudentDto
 {
-    public int StudentId { get; set; }
 
     public string? Names { get; set; }
 
@@ -10,6 +9,14 @@ public class StudentDto
 
     public string? Gender { get; set; }
 
-    public int? Ages { get; set; }
+    public int? Age { get; set; }
+    
+    public string? Email { get; set; }
+    
+    public string? Password { get; set; }
+    
+    public string? PhoneNumber { get; set; }
+    
+    public string? Program { get; set; }
     
 }

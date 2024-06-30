@@ -13,9 +13,9 @@ public partial class RegisterDetail
 
     public DateTime? UpdatedAt { get; set; }
 
-    public int ProgSubjlId { get; set; }
+    public int ProgSubjId { get; set; }
 
-    public virtual ProgramSubject ProgSubjl { get; set; } = null!;
+    public virtual ProgramSubject ProgSubj { get; set; } = null!;
 
     public virtual Register Regiter { get; set; } = null!;
 }

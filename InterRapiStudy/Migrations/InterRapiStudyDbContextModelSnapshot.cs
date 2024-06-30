@@ -124,9 +124,9 @@ namespace InterRapiStudy.Migrations
                         .HasColumnType("timestamp")
                         .HasColumnName("created_at");
 
-                    b.Property<int>("ProgSubjlId")
+                    b.Property<int>("ProgSublId")
                         .HasColumnType("int")
-                        .HasColumnName("prog_subjl_id");
+                        .HasColumnName("prog_subj_id");
 
                     b.Property<int>("RegiterId")
                         .HasColumnType("int")
@@ -139,7 +139,7 @@ namespace InterRapiStudy.Migrations
                     b.HasKey("RegDetId")
                         .HasName("PRIMARY");
 
-                    b.HasIndex(new[] { "ProgSubjlId" }, "fk_register_detail_program_detail1_idx");
+                    b.HasIndex(new[] { "ProgSubjId" }, "fk_register_detail_program_detail1_idx");
 
                     b.HasIndex(new[] { "RegiterId" }, "fk_register_detail_regiter1_idx");
 

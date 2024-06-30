@@ -33,8 +33,9 @@ namespace InterRapiStudy.Controllers
 
         // POST api/<StudentController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task Post([FromBody] StudentDto studentDto)
         {
+            await _studentService.CreateStudent(studentDto);
         }
 
         // PUT api/<StudentController>/5

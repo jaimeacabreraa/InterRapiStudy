@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using InterRapiStudy.Dtos;
+using InterRapiStudy.Services;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -6,13 +8,13 @@ namespace InterRapiStudy.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProgramController : ControllerBase
+    public class ProgramController(IProgramService programService) : ControllerBase
     {
         // GET: api/<ProgramController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IEnumerable<FindProgramStudyDto>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return await programService.FindPrograms();
         }
 
         // GET api/<ProgramController>/5
@@ -24,8 +26,9 @@ namespace InterRapiStudy.Controllers
 
         // POST api/<ProgramController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task Post([FromBody] CreateProgramStudyDto programStudyDto)
         {
+            await programService.CreateProgram(programStudyDto);
         }
 
         // PUT api/<ProgramController>/5

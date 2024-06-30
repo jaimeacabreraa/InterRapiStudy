@@ -70,7 +70,7 @@ public partial class InterRapiStudyDbContext : DbContext
 
         modelBuilder.Entity<ProgramSubject>(entity =>
         {
-            entity.HasKey(e => e.ProgSubjtId).HasName("PRIMARY");
+            entity.HasKey(e => e.ProgSubjId).HasName("PRIMARY");
 
             entity.ToTable("program_subject");
 
@@ -80,7 +80,7 @@ public partial class InterRapiStudyDbContext : DbContext
 
             entity.HasIndex(e => e.TeacherId, "fk_program_detail_teacher1_idx");
 
-            entity.Property(e => e.ProgSubjtId).HasColumnName("prog_subjt_id");
+            entity.Property(e => e.ProgSubjId).HasColumnName("prog_subj_id");
             entity.Property(e => e.ProgramId).HasColumnName("program_id");
             entity.Property(e => e.SubjectId).HasColumnName("subject_id");
             entity.Property(e => e.TeacherId).HasColumnName("teacher_id");
@@ -130,7 +130,7 @@ public partial class InterRapiStudyDbContext : DbContext
 
             entity.ToTable("register_detail");
 
-            entity.HasIndex(e => e.ProgSubjlId, "fk_register_detail_program_detail1_idx");
+            entity.HasIndex(e => e.ProgSubjId, "fk_register_detail_program_detail1_idx");
 
             entity.HasIndex(e => e.RegiterId, "fk_register_detail_regiter1_idx");
 
@@ -138,13 +138,13 @@ public partial class InterRapiStudyDbContext : DbContext
             entity.Property(e => e.CreatedAt)
                 .HasColumnType("timestamp")
                 .HasColumnName("created_at");
-            entity.Property(e => e.ProgSubjlId).HasColumnName("prog_subjl_id");
+            entity.Property(e => e.ProgSubjId).HasColumnName("prog_subj_id");
             entity.Property(e => e.RegiterId).HasColumnName("regiter_id");
             entity.Property(e => e.UpdatedAt)
                 .HasColumnType("timestamp")
                 .HasColumnName("updated_at");
 
-            entity.HasOne(d => d.ProgSubjl).WithMany(p => p.RegisterDetails).HasForeignKey(d => d.ProgSubjlId);
+            entity.HasOne(d => d.ProgSubj).WithMany(p => p.RegisterDetails).HasForeignKey(d => d.ProgSubjId);
 
             entity.HasOne(d => d.Regiter).WithMany(p => p.RegisterDetails)
                 .HasForeignKey(d => d.RegiterId)

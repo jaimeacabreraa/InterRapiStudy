@@ -11,15 +11,12 @@ namespace InterRapiStudy.Controllers
     [ApiController]
     public class SubjectController(ISubjectService subjectService) : ControllerBase
     {
-
-        private readonly ISubjectService _subjectService = subjectService;
-
         // GET: api/<SubjectController>
         [HttpGet]
         public Task<IEnumerable<FindSubjectDto>> Get()
         {
 
-            return _subjectService.FindAll();
+            return subjectService.FindAll();
         }
 
         // GET api/<SubjectController>/5
@@ -33,7 +30,7 @@ namespace InterRapiStudy.Controllers
         [HttpPost]
         public async Task Post([FromBody] CreateSubjectDto subjectDto)
         {
-            await _subjectService.Create(subjectDto);
+            await subjectService.Create(subjectDto);
         }
 
         // PUT api/<SubjectController>/5

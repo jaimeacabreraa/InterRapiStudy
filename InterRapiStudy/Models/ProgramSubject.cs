@@ -5,7 +5,7 @@ namespace InterRapiStudy.Models;
 
 public partial class ProgramSubject
 {
-    public int ProgSubjtId { get; set; }
+    public int ProgSubjId { get; set; }
 
     public int SubjectId { get; set; }
 
