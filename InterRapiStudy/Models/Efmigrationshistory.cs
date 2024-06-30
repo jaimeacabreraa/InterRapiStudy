@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace InterRapiStudy.Models;
 
-namespace InterRapiStudy.Models;
-
-public partial class Efmigrationshistory
+public class Efmigrationshistory
 {
     public string MigrationId { get; set; } = null!;
 

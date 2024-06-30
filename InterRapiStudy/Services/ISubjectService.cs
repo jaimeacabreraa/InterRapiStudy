@@ -1,10 +1,9 @@
 ﻿using InterRapiStudy.Dtos;
 
-namespace InterRapiStudy.Services
+namespace InterRapiStudy.Services;
+
+public interface ISubjectService
 {
-    public interface ISubjectService
-    {
-        Task Create(CreateSubjectDto subjectDto);
-        Task<IEnumerable<FindSubjectDto>> FindAll ();
-    }
+    Task Create(CreateSubjectDto subjectDto);
+    Task<IEnumerable<FindSubjectDto>> FindAll();
 }

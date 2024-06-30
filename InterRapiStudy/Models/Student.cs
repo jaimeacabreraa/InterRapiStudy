@@ -1,25 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace InterRapiStudy.Models;
 
-namespace InterRapiStudy.Models;
-
-public partial class Student
+public class Student
 {
     public int StudentId { get; set; }
 
-    public string? Names { get; set; }
+    public string Names { get; set; } = null!;
 
-    public string? Surnames { get; set; }
+    public string Surnames { get; set; } = null!;
 
-    public string? Gender { get; set; }
+    public string Gender { get; set; } = null!;
 
-    public int? Age { get; set; }
+    public int Age { get; set; }
 
-    public string? Email { get; set; }
+    public string Email { get; set; } = null!;
 
-    public string? PhoneNumber { get; set; }
+    public string PhoneNumber { get; set; } = null!;
 
-    public string? Password { get; set; }
+    public string Password { get; set; } = null!;
 
     public int ProgramId { get; set; }
 

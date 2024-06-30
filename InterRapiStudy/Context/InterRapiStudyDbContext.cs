@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using InterRapiStudy.Models;
+﻿using InterRapiStudy.Models;
 using Microsoft.EntityFrameworkCore;
-using Pomelo.EntityFrameworkCore.MySql.Scaffolding.Internal;
 
 namespace InterRapiStudy.Context;
 
@@ -34,8 +31,9 @@ public partial class InterRapiStudyDbContext : DbContext
     public virtual DbSet<Teacher> Teachers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseMySql("server=localhost;database=inter_rapi_study_db;user=root;password=root", Microsoft.EntityFrameworkCore.ServerVersion.Parse("8.0.36-mysql"));
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https: //go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
+        => optionsBuilder.UseMySql("server=localhost;database=inter_rapi_study_db;user=root;password=root",
+            ServerVersion.Parse("8.0.36-mysql"));
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -61,6 +59,8 @@ public partial class InterRapiStudyDbContext : DbContext
             entity.HasKey(e => e.ProgramId).HasName("PRIMARY");
 
             entity.ToTable("program_study");
+
+            entity.HasIndex(e => e.Name, "program_study_unique").IsUnique();
 
             entity.Property(e => e.ProgramId).HasColumnName("program_id");
             entity.Property(e => e.Name)
@@ -107,21 +107,27 @@ public partial class InterRapiStudyDbContext : DbContext
 
             entity.ToTable("register");
 
-            entity.HasIndex(e => e.StudentId, "fk_regiter_Student1_idx");
+            entity.HasIndex(e => e.StudentId, "fk_regiter_sudent1_idx");
+
+            entity.HasIndex(e => e.Uid, "register_unique").IsUnique();
 
             entity.Property(e => e.RegId).HasColumnName("reg_id");
             entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp")
                 .HasColumnName("created_at");
-            entity.Property(e => e.StudentId).HasColumnName("Student_id");
+            entity.Property(e => e.StudentId).HasColumnName("student_id");
             entity.Property(e => e.Uid)
                 .HasMaxLength(100)
                 .HasColumnName("uid");
             entity.Property(e => e.UpdatedAt)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp")
                 .HasColumnName("updated_at");
 
-            entity.HasOne(d => d.Student).WithMany(p => p.Registers).HasForeignKey(d => d.StudentId);
+            entity.HasOne(d => d.Student).WithMany(p => p.Registers)
+                .HasForeignKey(d => d.StudentId)
+                .HasConstraintName("FK_register_student_sudent_id");
         });
 
         modelBuilder.Entity<RegisterDetail>(entity =>
@@ -136,15 +142,19 @@ public partial class InterRapiStudyDbContext : DbContext
 
             entity.Property(e => e.RegDetId).HasColumnName("reg_det_id");
             entity.Property(e => e.CreatedAt)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp")
                 .HasColumnName("created_at");
             entity.Property(e => e.ProgSubjId).HasColumnName("prog_subj_id");
             entity.Property(e => e.RegiterId).HasColumnName("regiter_id");
             entity.Property(e => e.UpdatedAt)
+                .HasDefaultValueSql("CURRENT_TIMESTAMP")
                 .HasColumnType("timestamp")
                 .HasColumnName("updated_at");
 
-            entity.HasOne(d => d.ProgSubj).WithMany(p => p.RegisterDetails).HasForeignKey(d => d.ProgSubjId);
+            entity.HasOne(d => d.ProgSubj).WithMany(p => p.RegisterDetails)
+                .HasForeignKey(d => d.ProgSubjId)
+                .HasConstraintName("FK_register_detail_program_subject_prog_subjl_id");
 
             entity.HasOne(d => d.Regiter).WithMany(p => p.RegisterDetails)
                 .HasForeignKey(d => d.RegiterId)
@@ -159,6 +169,8 @@ public partial class InterRapiStudyDbContext : DbContext
             entity.ToTable("student");
 
             entity.HasIndex(e => e.ProgramId, "fk_student_program1_idx");
+
+            entity.HasIndex(e => e.Email, "student_unique").IsUnique();
 
             entity.Property(e => e.StudentId).HasColumnName("student_id");
             entity.Property(e => e.Age).HasColumnName("age");
@@ -194,6 +206,8 @@ public partial class InterRapiStudyDbContext : DbContext
 
             entity.ToTable("subject");
 
+            entity.HasIndex(e => e.Name, "subject_unique").IsUnique();
+
             entity.Property(e => e.SubjectId).HasColumnName("subject_id");
             entity.Property(e => e.Credits).HasColumnName("credits");
             entity.Property(e => e.Name)
@@ -206,6 +220,8 @@ public partial class InterRapiStudyDbContext : DbContext
             entity.HasKey(e => e.TeacherId).HasName("PRIMARY");
 
             entity.ToTable("teacher");
+
+            entity.HasIndex(e => e.Email, "teacher_unique").IsUnique();
 
             entity.Property(e => e.TeacherId).HasColumnName("teacher_id");
             entity.Property(e => e.Email)

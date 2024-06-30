@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace InterRapiStudy.Models;
 
-namespace InterRapiStudy.Models;
-
-public partial class RegisterDetail
+public class RegisterDetail
 {
     public int RegDetId { get; set; }
 

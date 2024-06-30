@@ -8,8 +8,6 @@ namespace InterRapiStudy.Mappers;
 public partial class ProgramStudyMapper
 {
     public partial ProgramStudy ProgramDtoToProgram(CreateProgramStudyDto programDto);
-    
-    public partial FindProgramStudyDto ProgramToProgramDto(ProgramStudy program);
-    
 
+    public partial FindProgramStudyDto ProgramToProgramDto(ProgramStudy program);
 }

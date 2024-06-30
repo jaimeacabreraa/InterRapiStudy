@@ -20,7 +20,7 @@ public static class AutoMapperConfig
                     // Aquí puedes agregar lo que deseas imprimir
                     Console.WriteLine($"Mapeo completado de {src.Program.Name} a {dest.Program}");
                 });
-                
+
             cfg.CreateMap<StudentDto, Student>()
                 .ForMember(dest => dest.Program, opt => opt.Ignore());
 
@@ -32,12 +32,11 @@ public static class AutoMapperConfig
                 .ForMember(
                     dest => dest.ProgramStudy,
                     opt => opt.MapFrom(src => src.Program.Name)
-                    )
+                )
                 .ForMember(
                     dest => dest.TeacherEmail,
                     opt => opt.MapFrom(src => src.Teacher.Email)
                 );
-
         });
 
         return config.CreateMapper();

@@ -15,11 +15,11 @@ public class TeacherService(InterRapiStudyDbContext context) : ITeacherService
         var teachers = await _context.Teachers.ToListAsync();
         return teachers.Select(teacher => _mapper.TeacherToTeacherDto(teacher));
     }
-    
+
     public async Task CreateTeacher(CreateTeacherDto teacherDto)
-    {   
+    {
         var teacher = _mapper.TeacherDtoToTeacher(teacherDto);
         await _context.Teachers.AddAsync(teacher);
         await _context.SaveChangesAsync();
     }
-} 
+}

@@ -14,7 +14,7 @@ public class StudentService(InterRapiStudyDbContext context) : IStudentService
 
     public async Task<IEnumerable<StudentDto>> GetStudents()
     {
-        var students = await context.Students.Include(st=>st.Program).Select(
+        var students = await context.Students.Include(st => st.Program).Select(
             st => _mapper.Map<StudentDto>(st)
         ).ToArrayAsync();
         return students;
@@ -22,6 +22,10 @@ public class StudentService(InterRapiStudyDbContext context) : IStudentService
 
     public async Task CreateStudent(StudentDto studentDto)
     {
+        var student1 = await context.Students.FirstOrDefaultAsync(st => st.Email == studentDto.Email);
+
+        if (student1 != null) throw new ArgumentException("El correo electrónico ya está en uso.");
+
         var program = await context.ProgramStudies.SingleAsync(p => p.Name == studentDto.Program);
         var student = _mapper.Map<Student>(studentDto);
         student.ProgramId = program.ProgramId;

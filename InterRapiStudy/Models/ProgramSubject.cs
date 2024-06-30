@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace InterRapiStudy.Models;
 
-namespace InterRapiStudy.Models;
-
-public partial class ProgramSubject
+public class ProgramSubject
 {
     public int ProgSubjId { get; set; }
 

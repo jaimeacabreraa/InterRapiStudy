@@ -9,5 +9,4 @@ public partial class TeacherMapper
 {
     public partial Teacher TeacherDtoToTeacher(CreateTeacherDto teacherDto);
     public partial FindTeacherDto TeacherToTeacherDto(Teacher teacher);
-
 }

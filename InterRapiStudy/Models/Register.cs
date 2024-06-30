@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace InterRapiStudy.Models;
 
-namespace InterRapiStudy.Models;
-
-public partial class Register
+public class Register
 {
     public int RegId { get; set; }
 
-    public string? Uid { get; set; }
+    public string Uid { get; set; } = null!;
 
     public DateTime? CreatedAt { get; set; }
 

@@ -1,9 +1,9 @@
 ﻿using InterRapiStudy.Context;
+using InterRapiStudy.Dtos;
 using InterRapiStudy.Mappers;
-using InterRapiStudy.Services;
 using Microsoft.EntityFrameworkCore;
 
-namespace InterRapiStudy.Dtos;
+namespace InterRapiStudy.Services;
 
 public class ProgramService(InterRapiStudyDbContext context) : IProgramService
 {

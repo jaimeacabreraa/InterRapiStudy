@@ -9,5 +9,4 @@ public partial class SubjectMapper
 {
     public partial Subject SubjectDtoToSubject(CreateSubjectDto subjectDto);
     public partial FindSubjectDto SubjectToSubjectDto(Subject subject);
-
 }
