@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace InterRapiStudy.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class InitialMigration : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,12 +16,28 @@ namespace InterRapiStudy.Migrations
                 .Annotation("MySql:CharSet", "utf8mb3");
 
             migrationBuilder.CreateTable(
+                name: "__efmigrationshistory",
+                columns: table => new
+                {
+                    MigrationId = table.Column<string>(type: "varchar(150)", maxLength: 150, nullable: false, collation: "utf8mb4_0900_ai_ci")
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ProductVersion = table.Column<string>(type: "varchar(32)", maxLength: 32, nullable: false, collation: "utf8mb4_0900_ai_ci")
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PRIMARY", x => x.MigrationId);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4")
+                .Annotation("Relational:Collation", "utf8mb4_0900_ai_ci");
+
+            migrationBuilder.CreateTable(
                 name: "program_study",
                 columns: table => new
                 {
                     program_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    name = table.Column<string>(type: "varchar(45)", maxLength: 45, nullable: true, collation: "utf8mb3_general_ci")
+                    name = table.Column<string>(type: "varchar(45)", maxLength: 45, nullable: false, collation: "utf8mb3_general_ci")
                         .Annotation("MySql:CharSet", "utf8mb3")
                 },
                 constraints: table =>
@@ -37,9 +53,9 @@ namespace InterRapiStudy.Migrations
                 {
                     subject_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    name = table.Column<string>(type: "varchar(45)", maxLength: 45, nullable: true, collation: "utf8mb3_general_ci")
+                    name = table.Column<string>(type: "varchar(45)", maxLength: 45, nullable: false, collation: "utf8mb3_general_ci")
                         .Annotation("MySql:CharSet", "utf8mb3"),
-                    credits = table.Column<int>(type: "int", nullable: true)
+                    credits = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,11 +70,11 @@ namespace InterRapiStudy.Migrations
                 {
                     teacher_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    names = table.Column<string>(type: "varchar(45)", maxLength: 45, nullable: true, collation: "utf8mb3_general_ci")
+                    names = table.Column<string>(type: "varchar(45)", maxLength: 45, nullable: false, collation: "utf8mb3_general_ci")
                         .Annotation("MySql:CharSet", "utf8mb3"),
-                    surnames = table.Column<string>(type: "varchar(45)", maxLength: 45, nullable: true, collation: "utf8mb3_general_ci")
+                    surnames = table.Column<string>(type: "varchar(45)", maxLength: 45, nullable: false, collation: "utf8mb3_general_ci")
                         .Annotation("MySql:CharSet", "utf8mb3"),
-                    email = table.Column<string>(type: "varchar(70)", maxLength: 70, nullable: true, collation: "utf8mb3_general_ci")
+                    email = table.Column<string>(type: "varchar(70)", maxLength: 70, nullable: false, collation: "utf8mb3_general_ci")
                         .Annotation("MySql:CharSet", "utf8mb3")
                 },
                 constraints: table =>
@@ -74,18 +90,18 @@ namespace InterRapiStudy.Migrations
                 {
                     student_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    names = table.Column<string>(type: "varchar(45)", maxLength: 45, nullable: true, collation: "utf8mb3_general_ci")
+                    names = table.Column<string>(type: "varchar(45)", maxLength: 45, nullable: false, collation: "utf8mb3_general_ci")
                         .Annotation("MySql:CharSet", "utf8mb3"),
-                    surnames = table.Column<string>(type: "varchar(45)", maxLength: 45, nullable: true, collation: "utf8mb3_general_ci")
+                    surnames = table.Column<string>(type: "varchar(45)", maxLength: 45, nullable: false, collation: "utf8mb3_general_ci")
                         .Annotation("MySql:CharSet", "utf8mb3"),
-                    gender = table.Column<string>(type: "varchar(45)", maxLength: 45, nullable: true, collation: "utf8mb3_general_ci")
+                    gender = table.Column<string>(type: "varchar(45)", maxLength: 45, nullable: false, collation: "utf8mb3_general_ci")
                         .Annotation("MySql:CharSet", "utf8mb3"),
-                    age = table.Column<int>(type: "int", nullable: true),
-                    email = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true, collation: "utf8mb3_general_ci")
+                    age = table.Column<int>(type: "int", nullable: false),
+                    email = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false, collation: "utf8mb3_general_ci")
                         .Annotation("MySql:CharSet", "utf8mb3"),
-                    phone_number = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true, collation: "utf8mb3_general_ci")
+                    phone_number = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false, collation: "utf8mb3_general_ci")
                         .Annotation("MySql:CharSet", "utf8mb3"),
-                    password = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true, collation: "utf8mb3_general_ci")
+                    password = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false, collation: "utf8mb3_general_ci")
                         .Annotation("MySql:CharSet", "utf8mb3"),
                     program_id = table.Column<int>(type: "int", nullable: false)
                 },
@@ -105,7 +121,7 @@ namespace InterRapiStudy.Migrations
                 name: "program_subject",
                 columns: table => new
                 {
-                    prog_subjt_id = table.Column<int>(type: "int", nullable: false)
+                    prog_subj_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     subject_id = table.Column<int>(type: "int", nullable: false),
                     teacher_id = table.Column<int>(type: "int", nullable: false),
@@ -113,7 +129,7 @@ namespace InterRapiStudy.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PRIMARY", x => x.prog_subjt_id);
+                    table.PrimaryKey("PRIMARY", x => x.prog_subj_id);
                     table.ForeignKey(
                         name: "fk_program_detail_program1",
                         column: x => x.program_id,
@@ -139,18 +155,18 @@ namespace InterRapiStudy.Migrations
                 {
                     reg_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    uid = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: true, collation: "utf8mb3_general_ci")
+                    uid = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false, collation: "utf8mb3_general_ci")
                         .Annotation("MySql:CharSet", "utf8mb3"),
-                    created_at = table.Column<DateTime>(type: "timestamp", nullable: true),
-                    updated_at = table.Column<DateTime>(type: "timestamp", nullable: true),
-                    sudent_id = table.Column<int>(type: "int", nullable: false)
+                    created_at = table.Column<DateTime>(type: "timestamp", nullable: true, defaultValueSql: "CURRENT_TIMESTAMP"),
+                    updated_at = table.Column<DateTime>(type: "timestamp", nullable: true, defaultValueSql: "CURRENT_TIMESTAMP"),
+                    student_id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PRIMARY", x => x.reg_id);
                     table.ForeignKey(
                         name: "FK_register_student_sudent_id",
-                        column: x => x.sudent_id,
+                        column: x => x.student_id,
                         principalTable: "student",
                         principalColumn: "student_id",
                         onDelete: ReferentialAction.Cascade);
@@ -165,18 +181,18 @@ namespace InterRapiStudy.Migrations
                     reg_det_id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     regiter_id = table.Column<int>(type: "int", nullable: false),
-                    created_at = table.Column<DateTime>(type: "timestamp", nullable: true),
-                    updated_at = table.Column<DateTime>(type: "timestamp", nullable: true),
-                    prog_subjl_id = table.Column<int>(type: "int", nullable: false)
+                    created_at = table.Column<DateTime>(type: "timestamp", nullable: true, defaultValueSql: "CURRENT_TIMESTAMP"),
+                    updated_at = table.Column<DateTime>(type: "timestamp", nullable: true, defaultValueSql: "CURRENT_TIMESTAMP"),
+                    prog_subj_id = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PRIMARY", x => x.reg_det_id);
                     table.ForeignKey(
                         name: "FK_register_detail_program_subject_prog_subjl_id",
-                        column: x => x.prog_subjl_id,
+                        column: x => x.prog_subj_id,
                         principalTable: "program_subject",
-                        principalColumn: "prog_subjt_id",
+                        principalColumn: "prog_subj_id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_register_detail_regiter1",
@@ -186,6 +202,12 @@ namespace InterRapiStudy.Migrations
                 })
                 .Annotation("MySql:CharSet", "utf8mb3")
                 .Annotation("Relational:Collation", "utf8mb3_general_ci");
+
+            migrationBuilder.CreateIndex(
+                name: "program_study_unique",
+                table: "program_study",
+                column: "name",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "fk_program_detail_program1_idx",
@@ -205,12 +227,18 @@ namespace InterRapiStudy.Migrations
             migrationBuilder.CreateIndex(
                 name: "fk_regiter_sudent1_idx",
                 table: "register",
-                column: "sudent_id");
+                column: "student_id");
+
+            migrationBuilder.CreateIndex(
+                name: "register_unique",
+                table: "register",
+                column: "uid",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "fk_register_detail_program_detail1_idx",
                 table: "register_detail",
-                column: "prog_subjl_id");
+                column: "prog_subj_id");
 
             migrationBuilder.CreateIndex(
                 name: "fk_register_detail_regiter1_idx",
@@ -221,11 +249,32 @@ namespace InterRapiStudy.Migrations
                 name: "fk_student_program1_idx",
                 table: "student",
                 column: "program_id");
+
+            migrationBuilder.CreateIndex(
+                name: "student_unique",
+                table: "student",
+                column: "email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "subject_unique",
+                table: "subject",
+                column: "name",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "teacher_unique",
+                table: "teacher",
+                column: "email",
+                unique: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "__efmigrationshistory");
+
             migrationBuilder.DropTable(
                 name: "register_detail");
 
