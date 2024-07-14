@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InterRapiStudy.Migrations
 {
     [DbContext(typeof(InterRapiStudyDbContext))]
-    [Migration("20240630233058_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20240714212455_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,31 +21,11 @@ namespace InterRapiStudy.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .UseCollation("utf8mb3_general_ci")
-                .HasAnnotation("ProductVersion", "8.0.6")
+                .HasAnnotation("ProductVersion", "8.0.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             MySqlModelBuilderExtensions.HasCharSet(modelBuilder, "utf8mb3");
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
-
-            modelBuilder.Entity("InterRapiStudy.Models.Efmigrationshistory", b =>
-                {
-                    b.Property<string>("MigrationId")
-                        .HasMaxLength(150)
-                        .HasColumnType("varchar(150)");
-
-                    b.Property<string>("ProductVersion")
-                        .IsRequired()
-                        .HasMaxLength(32)
-                        .HasColumnType("varchar(32)");
-
-                    b.HasKey("MigrationId")
-                        .HasName("PRIMARY");
-
-                    b.ToTable("__efmigrationshistory", (string)null);
-
-                    MySqlEntityTypeBuilderExtensions.HasCharSet(b, "utf8mb4");
-                    MySqlEntityTypeBuilderExtensions.UseCollation(b, "utf8mb4_0900_ai_ci");
-                });
 
             modelBuilder.Entity("InterRapiStudy.Models.ProgramStudy", b =>
                 {

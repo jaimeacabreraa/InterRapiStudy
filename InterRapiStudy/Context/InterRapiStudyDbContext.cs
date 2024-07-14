@@ -13,9 +13,6 @@ public partial class InterRapiStudyDbContext : DbContext
         : base(options)
     {
     }
-
-    public virtual DbSet<Efmigrationshistory> Efmigrationshistories { get; set; }
-
     public virtual DbSet<ProgramStudy> ProgramStudies { get; set; }
 
     public virtual DbSet<ProgramSubject> ProgramSubjects { get; set; }
@@ -40,19 +37,6 @@ public partial class InterRapiStudyDbContext : DbContext
         modelBuilder
             .UseCollation("utf8mb3_general_ci")
             .HasCharSet("utf8mb3");
-
-        modelBuilder.Entity<Efmigrationshistory>(entity =>
-        {
-            entity.HasKey(e => e.MigrationId).HasName("PRIMARY");
-
-            entity
-                .ToTable("__efmigrationshistory")
-                .HasCharSet("utf8mb4")
-                .UseCollation("utf8mb4_0900_ai_ci");
-
-            entity.Property(e => e.MigrationId).HasMaxLength(150);
-            entity.Property(e => e.ProductVersion).HasMaxLength(32);
-        });
 
         modelBuilder.Entity<ProgramStudy>(entity =>
         {
